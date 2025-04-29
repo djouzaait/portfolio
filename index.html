@@ -13,13 +13,16 @@
   <body>
     <header class="header">
       <a href="#" class="logo"><span>Djouza</span></a>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="bx bx-menu"></i>
+      </div>
       <nav class="navbar">
         <a href="#home" class="active">Portfolio</a>
         <a href="#services">Services</a>
         <a href="#skills">Mes Compétences</a>
         <a href="#projects">Projects</a>
+        <a href="#contact" class="contact-btn">Contact Me</a>
       </nav>
-      <a href="#contact" class="contact-btn">Contact Me</a>
     </header>
 
     <section id="home" class="home">
@@ -186,5 +189,28 @@
         <button type="submit" class="btn btn-primary">Send Message</button>
       </form>
     </section>
+
+    <script>
+      const menuToggle = document.getElementById('menu-toggle');
+      const navbar = document.querySelector('.navbar');
+      menuToggle.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+      });
+      const sections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        let scrollY = window.pageYOffset;
+        sections.forEach(current => {
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 60;
+          const sectionId = current.getAttribute('id');
+          const link = document.querySelector('.navbar a[href*=' + sectionId + ']');
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
